@@ -12,9 +12,12 @@
 		843131871E5C698D00F657CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843131851E5C698D00F657CE /* Main.storyboard */; };
 		843131891E5C698D00F657CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843131881E5C698D00F657CE /* Assets.xcassets */; };
 		8431318C1E5C698D00F657CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8431318A1E5C698D00F657CE /* LaunchScreen.storyboard */; };
+		8F1CCCF568C4CDC3249F143C /* Pods_Informer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		198B99D679B538A6E1012965 /* Pods-Informer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Informer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Informer/Pods-Informer.release.xcconfig"; sourceTree = "<group>"; };
+		7CEF1AADD672149CEC259152 /* Pods-Informer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Informer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Informer/Pods-Informer.debug.xcconfig"; sourceTree = "<group>"; };
 		8431317E1E5C698D00F657CE /* Informer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Informer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843131811E5C698D00F657CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843131831E5C698D00F657CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		843131881E5C698D00F657CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8431318B1E5C698D00F657CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8431318D1E5C698D00F657CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Informer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F1CCCF568C4CDC3249F143C /* Pods_Informer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10367130F95E76D839FD14F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		661853921FAEDD25C28DCB1E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CEF1AADD672149CEC259152 /* Pods-Informer.debug.xcconfig */,
+				198B99D679B538A6E1012965 /* Pods-Informer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		843131751E5C698D00F657CE = {
 			isa = PBXGroup;
 			children = (
 				843131801E5C698D00F657CE /* Informer */,
 				8431317F1E5C698D00F657CE /* Products */,
+				661853921FAEDD25C28DCB1E /* Pods */,
+				10367130F95E76D839FD14F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843131901E5C698D00F657CE /* Build configuration list for PBXNativeTarget "Informer" */;
 			buildPhases = (
+				69777374CBA23D0E1B20F4CA /* [CP] Check Pods Manifest.lock */,
 				8431317A1E5C698D00F657CE /* Sources */,
 				8431317B1E5C698D00F657CE /* Frameworks */,
 				8431317C1E5C698D00F657CE /* Resources */,
+				F0B0B02D09B1D05B99AE75B8 /* [CP] Embed Pods Frameworks */,
+				254EF6D1A6A906AF7444D02C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		254EF6D1A6A906AF7444D02C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Informer/Pods-Informer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		69777374CBA23D0E1B20F4CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F0B0B02D09B1D05B99AE75B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Informer/Pods-Informer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8431317A1E5C698D00F657CE /* Sources */ = {
@@ -256,6 +331,7 @@
 		};
 		843131911E5C698D00F657CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CEF1AADD672149CEC259152 /* Pods-Informer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Informer/Info.plist;
@@ -268,6 +344,7 @@
 		};
 		843131921E5C698D00F657CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 198B99D679B538A6E1012965 /* Pods-Informer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Informer/Info.plist;
