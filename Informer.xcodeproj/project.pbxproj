@@ -11,6 +11,8 @@
 		843131871E5C698D00F657CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843131851E5C698D00F657CE /* Main.storyboard */; };
 		843131891E5C698D00F657CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843131881E5C698D00F657CE /* Assets.xcassets */; };
 		8431318C1E5C698D00F657CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8431318A1E5C698D00F657CE /* LaunchScreen.storyboard */; };
+		8439C9731E5C768B00E30C85 /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C9721E5C768B00E30C85 /* WeatherTableViewController.swift */; };
+		8439C9751E5C774F00E30C85 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C9741E5C774F00E30C85 /* WeatherModel.swift */; };
 		8F1CCCF568C4CDC3249F143C /* Pods_Informer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 		843131881E5C698D00F657CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8431318B1E5C698D00F657CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8431318D1E5C698D00F657CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8439C9721E5C768B00E30C85 /* WeatherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherTableViewController.swift; path = ViewController/WeatherTableViewController.swift; sourceTree = "<group>"; };
+		8439C9741E5C774F00E30C85 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherModel.swift; path = Model/WeatherModel.swift; sourceTree = "<group>"; };
 		A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Informer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -77,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				843131811E5C698D00F657CE /* AppDelegate.swift */,
+				8439C9721E5C768B00E30C85 /* WeatherTableViewController.swift */,
+				8439C9741E5C774F00E30C85 /* WeatherModel.swift */,
 				843131851E5C698D00F657CE /* Main.storyboard */,
 				843131881E5C698D00F657CE /* Assets.xcassets */,
 				8431318A1E5C698D00F657CE /* LaunchScreen.storyboard */,
@@ -208,6 +214,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8439C9731E5C768B00E30C85 /* WeatherTableViewController.swift in Sources */,
+				8439C9751E5C774F00E30C85 /* WeatherModel.swift in Sources */,
 				843131821E5C698D00F657CE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
