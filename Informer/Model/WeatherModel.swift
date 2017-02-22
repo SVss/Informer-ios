@@ -55,25 +55,36 @@ class WeatherModel {
     
     public func refresh() {
         print("*** Start refreshing weather")
-        _weather = [WeatherModelItem]()
         URLCache.shared.removeAllCachedResponses()
         Alamofire.request(YQUERY, encoding: URLEncoding.queryString).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
+                self._weather = [WeatherModelItem]()
+                DispatchQueue.main.async {
+                    self.delegate.reloadWeather()
+                }
                 let json = JSON(value)
                 let cities = json["query"]["results"]["channel"]
                 for (_,subJson):(String, JSON) in cities {
                     if let city = subJson["location"]["city"].string, let temperature = subJson["item"]["condition"]["temp"].string {
                         let newWeatherItem = WeatherModelItem(city, temperature: temperature)
                         self._weather.append(newWeatherItem)
-                        
+                        DispatchQueue.main.async {
+                            self.delegate.reloadWeather()
+                        }
                         print(city, temperature)
+                    } else {
+                        print("Invalid response format")
+                        DispatchQueue.main.async {
+                            self.delegate.onError()
+                        }
                     }
-                    self.delegate.reloadWeather()
                 }
             case .failure:
                 print("Can't load weather info")
-                self.delegate.onError()
+                DispatchQueue.main.async {
+                    self.delegate.onError()
+                }
             }
         }
     }

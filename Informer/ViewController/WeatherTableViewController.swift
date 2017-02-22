@@ -11,7 +11,6 @@ import UIKit
 protocol WeatherTableReloadAsyncDelegate {
     func reloadWeather()
     func onError()
-    func onReloadEnd()
 }
 
 
@@ -19,19 +18,18 @@ class WeatherTableViewController: UITableViewController, WeatherTableReloadAsync
     let alertController = UIAlertController(title: "Error", message: "Can't get weather info", preferredStyle: .alert)
     
     lazy var weatherModel: WeatherModel = WeatherModel(delegate: self)
-        
+    
+    @IBOutlet weak var refreshButtonOutlet: UIButton!
     @IBAction func RefreshButtonAction(_ sender: UIButton) {
         updateWeather()
     }
 
     internal func reloadWeather() {
         tableView.reloadData()
-        onReloadEnd()
     }
 
     internal func onError() {
         present(alertController, animated: true, completion: nil)
-        onReloadEnd()
     }
 
     internal func onReloadEnd() {
@@ -81,7 +79,6 @@ class WeatherTableViewController: UITableViewController, WeatherTableReloadAsync
     }
     
     private func updateWeather() {
-        self.view.isUserInteractionEnabled = false
         weatherModel.refresh()
     }
 }
