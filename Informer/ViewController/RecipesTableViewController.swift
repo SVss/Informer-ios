@@ -8,6 +8,13 @@
 
 import UIKit
 
+class RecipeTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelAuthor: UILabel!
+    @IBOutlet weak var imagePreview: UIImageView!
+}
+
 class RecipesTableViewController: UITableViewController {
 
     let recipesModel: RecipesModel = RecipesModel()
@@ -29,10 +36,13 @@ class RecipesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! RecipeTableViewCell
 
-        cell.textLabel?.text = recipesModel.recipes[indexPath.row].name
-
+        let currentRecipe = recipesModel.recipes[indexPath.row]
+        
+        cell.labelName?.text = currentRecipe.name
+        cell.labelAuthor?.text = currentRecipe.author
+        cell.imagePreview?.image = UIImage(contentsOfFile: currentRecipe.imagePath!)
         return cell
     }
     
