@@ -47,7 +47,10 @@ class RecipesTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "recipeDetails" {
+            let detailViewController = segue.destination as! RecipeDetailViewController
+            let recipe = recipesModel.recipes[(self.tableView.indexPathForSelectedRow?.row)!]
+            detailViewController.setData(recipe)
+        }
     }
 }
