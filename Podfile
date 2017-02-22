@@ -7,4 +7,5 @@ target 'Informer' do
 
   # Pods for Informer
   pod 'Alamofire', '~> 4.3'
+  pod 'SwiftyJSON', '~> 3.1'
 end

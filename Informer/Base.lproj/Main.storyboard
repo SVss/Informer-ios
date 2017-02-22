@@ -119,7 +119,18 @@
                             <outlet property="delegate" destination="UnW-ig-amo" id="zRO-mZ-S2z"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Weather" id="G7m-tc-ZPt"/>
+                    <navigationItem key="navigationItem" title="Weather" id="G7m-tc-ZPt">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="pld-dZ-VRS">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DLT-OZ-ZQg">
+                                <rect key="frame" x="311" y="-2" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="refresh"/>
+                                <connections>
+                                    <action selector="RefreshButtonAction:" destination="UnW-ig-amo" eventType="touchUpInside" id="zaa-OC-4jS"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbj-Uw-Twg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -166,6 +177,7 @@
     </scenes>
     <resources>
         <image name="note" width="22" height="22"/>
+        <image name="refresh" width="48" height="48"/>
         <image name="sun" width="38" height="38"/>
     </resources>
 </document>
