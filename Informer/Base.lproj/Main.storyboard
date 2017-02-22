@@ -27,21 +27,30 @@
             </objects>
             <point key="canvasLocation" x="-553" y="97"/>
         </scene>
-        <!--Recipies-->
+        <!--Recipes-->
         <scene sceneID="xFU-yQ-XnO">
             <objects>
-                <tableViewController id="F48-y2-POU" sceneMemberID="viewController">
+                <tableViewController id="F48-y2-POU" customClass="RecipesTableViewController" customModule="Informer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="j2N-Fz-31T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" id="uYP-By-EUD">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" textLabel="Ovf-sM-uIM" style="IBUITableViewCellStyleDefault" id="uYP-By-EUD">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uYP-By-EUD" id="34w-L8-u5O">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ovf-sM-uIM">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="oHO-rV-Ptr" kind="show" identifier="segueDetails" id="dqe-11-zHo"/>
@@ -53,7 +62,7 @@
                             <outlet property="delegate" destination="F48-y2-POU" id="xgR-NU-DX3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recipies" id="tSK-Wv-wd4"/>
+                    <navigationItem key="navigationItem" title="Recipes" id="tSK-Wv-wd4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSS-bX-BZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
