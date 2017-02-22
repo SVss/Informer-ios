@@ -30,6 +30,12 @@
         "name": "Flourless Peanut Butter Cookies",
         "author": "Stephanie T.",
         "desc": "Heavy, yummy, and very peanut-buttery. You'll need lots of milk to eat these!!"
+    },
+    {
+        "img": "5.jpg",
+        "name": "Strawberry Cheesecake",
+        "author": "Kathy Higgins",
+        "desc": "This creamy strawberry cheesecake is perfect for any special occasion! You have to bake the cake and let it cool for an hour, then chill it in the refrigerator for at least 4 hours prior to serving."
     }
-]
+    ]
 }
