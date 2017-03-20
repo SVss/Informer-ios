@@ -8,40 +8,32 @@
 
 import UIKit
 
-protocol WeatherTableReloadAsyncDelegate {
-    func reloadWeather()
-    func onError()
-}
-
-
 class WeatherTableViewController: UITableViewController, WeatherTableReloadAsyncDelegate {
     let alertController = UIAlertController(title: "Error", message: "Can't get weather info", preferredStyle: .alert)
     
     lazy var weatherModel: WeatherModel = WeatherModel(delegate: self)
-    
-    @IBOutlet weak var refreshButtonOutlet: UIButton!
-    @IBAction func RefreshButtonAction(_ sender: UIButton) {
-        updateWeather()
-    }
 
     internal func reloadWeather() {
         tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
 
     internal func onError() {
+        self.refreshControl?.endRefreshing()
         present(alertController, animated: true, completion: nil)
     }
 
-    internal func onReloadEnd() {
-        self.view.isUserInteractionEnabled = true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.refreshControl?.addTarget(self, action: #selector(WeatherTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         setDefaultAlertAction()
     }
 
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        updateWeather()
+    }
+    
     private func setDefaultAlertAction() {
         let defaultAlertAction = UIAlertAction(
             title: "OK",

@@ -89,3 +89,9 @@ class WeatherModel {
         }
     }
 }
+
+
+protocol WeatherTableReloadAsyncDelegate {
+    func reloadWeather()
+    func onError()
+}
