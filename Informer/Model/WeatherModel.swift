@@ -37,6 +37,8 @@ class WeatherModel {
     private let delegate: WeatherTableReloadAsyncDelegate
     private var _weather: [WeatherModelItem] = []
     
+    private var refreshing: Bool = false
+    
     public var getWeather: [WeatherModelItem] {
         get {
             return _weather
@@ -54,6 +56,10 @@ class WeatherModel {
     }
     
     public func refresh() {
+        if refreshing {
+            return
+        }
+        refreshing = true
         print("*** Start refreshing weather")
         URLCache.shared.removeAllCachedResponses()
         Alamofire.request(YQUERY, encoding: URLEncoding.queryString).validate().responseJSON { response in
@@ -86,6 +92,7 @@ class WeatherModel {
                     self.delegate.onError()
                 }
             }
+            self.refreshing = false
         }
     }
 }
