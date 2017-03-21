@@ -13,10 +13,8 @@
 		8431318C1E5C698D00F657CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8431318A1E5C698D00F657CE /* LaunchScreen.storyboard */; };
 		8439C9731E5C768B00E30C85 /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C9721E5C768B00E30C85 /* WeatherTableViewController.swift */; };
 		8439C9751E5C774F00E30C85 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C9741E5C774F00E30C85 /* WeatherModel.swift */; };
-		8439C9771E5D1A9600E30C85 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C9761E5D1A9600E30C85 /* RecipesTableViewController.swift */; };
-		8439C9791E5D1BA500E30C85 /* RecipesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C9781E5D1BA500E30C85 /* RecipesModel.swift */; };
-		8439C97B1E5D21CC00E30C85 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 8439C97A1E5D21CC00E30C85 /* data */; };
-		8439C97D1E5D2E4D00E30C85 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439C97C1E5D2E4D00E30C85 /* RecipeDetailViewController.swift */; };
+		84A2A2331E812ADC00D44FE0 /* FullMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2A2321E812ADC00D44FE0 /* FullMapViewController.swift */; };
+		84A2A2351E812BE000D44FE0 /* CityMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2A2341E812BE000D44FE0 /* CityMapViewController.swift */; };
 		8F1CCCF568C4CDC3249F143C /* Pods_Informer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +29,8 @@
 		8431318D1E5C698D00F657CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8439C9721E5C768B00E30C85 /* WeatherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherTableViewController.swift; path = ViewController/WeatherTableViewController.swift; sourceTree = "<group>"; };
 		8439C9741E5C774F00E30C85 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherModel.swift; path = Model/WeatherModel.swift; sourceTree = "<group>"; };
-		8439C9761E5D1A9600E30C85 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecipesTableViewController.swift; path = ViewController/RecipesTableViewController.swift; sourceTree = "<group>"; };
-		8439C9781E5D1BA500E30C85 /* RecipesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecipesModel.swift; path = Model/RecipesModel.swift; sourceTree = "<group>"; };
-		8439C97A1E5D21CC00E30C85 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
-		8439C97C1E5D2E4D00E30C85 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecipeDetailViewController.swift; path = ViewController/RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		84A2A2321E812ADC00D44FE0 /* FullMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullMapViewController.swift; path = ViewController/FullMapViewController.swift; sourceTree = "<group>"; };
+		84A2A2341E812BE000D44FE0 /* CityMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityMapViewController.swift; path = ViewController/CityMapViewController.swift; sourceTree = "<group>"; };
 		A6307093C5D13A6165D6E9FF /* Pods_Informer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Informer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,17 +84,15 @@
 		843131801E5C698D00F657CE /* Informer */ = {
 			isa = PBXGroup;
 			children = (
-				8439C97A1E5D21CC00E30C85 /* data */,
+				84A2A2341E812BE000D44FE0 /* CityMapViewController.swift */,
 				843131811E5C698D00F657CE /* AppDelegate.swift */,
 				8439C9721E5C768B00E30C85 /* WeatherTableViewController.swift */,
-				8439C9761E5D1A9600E30C85 /* RecipesTableViewController.swift */,
 				8439C9741E5C774F00E30C85 /* WeatherModel.swift */,
-				8439C97C1E5D2E4D00E30C85 /* RecipeDetailViewController.swift */,
-				8439C9781E5D1BA500E30C85 /* RecipesModel.swift */,
 				843131851E5C698D00F657CE /* Main.storyboard */,
 				843131881E5C698D00F657CE /* Assets.xcassets */,
 				8431318A1E5C698D00F657CE /* LaunchScreen.storyboard */,
 				8431318D1E5C698D00F657CE /* Info.plist */,
+				84A2A2321E812ADC00D44FE0 /* FullMapViewController.swift */,
 			);
 			path = Informer;
 			sourceTree = "<group>";
@@ -167,7 +161,6 @@
 			files = (
 				8431318C1E5C698D00F657CE /* LaunchScreen.storyboard in Resources */,
 				843131891E5C698D00F657CE /* Assets.xcassets in Resources */,
-				8439C97B1E5D21CC00E30C85 /* data in Resources */,
 				843131871E5C698D00F657CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,9 +222,8 @@
 			files = (
 				8439C9731E5C768B00E30C85 /* WeatherTableViewController.swift in Sources */,
 				8439C9751E5C774F00E30C85 /* WeatherModel.swift in Sources */,
-				8439C9791E5D1BA500E30C85 /* RecipesModel.swift in Sources */,
-				8439C9771E5D1A9600E30C85 /* RecipesTableViewController.swift in Sources */,
-				8439C97D1E5D2E4D00E30C85 /* RecipeDetailViewController.swift in Sources */,
+				84A2A2331E812ADC00D44FE0 /* FullMapViewController.swift in Sources */,
+				84A2A2351E812BE000D44FE0 /* CityMapViewController.swift in Sources */,
 				843131821E5C698D00F657CE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
