@@ -11,48 +11,20 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-class WeatherModelItem {
-    private var _cityName: String
-    private var _temperature: String
-    private var _location: CLLocation
-    
-    public var cityName: String {
-        get {
-            return _cityName
-        }
-    }
-    public var temperature: String {
-        get {
-            return String(_temperature) + " \u{00B0}C"
-        }
-    }
-    public var location: CLLocation {
-        get{
-            return self._location
-        }
-    }
-    
-    init(_ cityName: String, temperature: String, location: CLLocation) {
-        self._cityName = cityName
-        self._temperature = temperature
-        self._location = location
-    }
-}
-
 class WeatherModel {
     private var delegates: [WeatherReloadAsyncDelegate] = [WeatherReloadAsyncDelegate]();
-    private var _weather: [WeatherModelItem] = []
+    private var _cities: [City] = []
     private var _refreshing: Bool = false
     
-    public var getWeather: [WeatherModelItem] {
+    public var getWeather: [City] {
         get {
-            return _weather
+            return _cities
         }
     }
     
     public var count: Int {
         get {
-            return _weather.count
+            return _cities.count
         }
     }
     
@@ -72,22 +44,24 @@ class WeatherModel {
         Alamofire.request(YQUERY, encoding: URLEncoding.queryString).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
-//                print(value)
-                self._weather = [WeatherModelItem]()
-                self.invokeReloadWeather()
-                let json = JSON(value)
-                let cities = json["query"]["results"]["channel"]
-                for (_,subJson):(String, JSON) in cities {
-                    if let city = subJson["location"]["city"].string,
+                 print(value)
+                 self._cities = [City]()
+                 self.invokeReloadWeather()
+                 let json = JSON(value)
+                 let cities = json["query"]["results"]["channel"]
+                 var id: Int = 0
+                 for (_,subJson):(String, JSON) in cities {
+                    id += 1
+                    if let cityName = subJson["location"]["city"].string,
                         let temperature = subJson["item"]["condition"]["temp"].string,
                         let lat = Double(subJson["item"]["lat"].string!),
                         let long = Double(subJson["item"]["long"].string!)
                     {
                         let location = CLLocation(latitude: lat, longitude: long)
-                        let newWeatherItem = WeatherModelItem(city, temperature: temperature, location: location)
-                        self._weather.append(newWeatherItem)
+                        let newWeatherItem = City(id, name: cityName, temperature: temperature, location: location)
+                        self._cities.append(newWeatherItem)
                         self.invokeReloadWeather()
-                        print(city, temperature, location.coordinate.latitude, location.coordinate.longitude)
+                        print(cityName, temperature, location.coordinate.latitude, location.coordinate.longitude)
                     } else {
                         print("Invalid response format")
                         self.invokeOnError()

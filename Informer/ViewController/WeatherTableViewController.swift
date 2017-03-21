@@ -69,10 +69,21 @@ class WeatherTableViewController: UITableViewController, WeatherReloadAsyncDeleg
 
         let city = weatherModel.getWeather[indexPath.row]
         
-        cell.textLabel?.text = city.cityName
+        cell.textLabel?.text = city.name
         cell.detailTextLabel?.text = city.temperature
 
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showDetailWeatherMap") {
+            let detailViewController = segue.destination as! CityMapViewController
+            let city = weatherModel.getWeather[(self.tableView.indexPathForSelectedRow?.row)!]
+            let cityAnnotaion = CityAnnotation(coordinate: city.location.coordinate)
+            cityAnnotaion.title = city.name
+            cityAnnotaion.subtitle = city.temperature
+            detailViewController.selectCity(cityAnnotaion)
+        }
     }
     
     private func updateWeather() {

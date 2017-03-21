@@ -94,7 +94,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="WB4-YK-Y4Y" kind="show" id="9vc-ub-eBN"/>
+                                    <segue destination="WB4-YK-Y4Y" kind="show" identifier="showDetailWeatherMap" id="9vc-ub-eBN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
