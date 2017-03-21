@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import CoreLocation
 import Alamofire
 import SwiftyJSON
 
 class WeatherModelItem {
     private var _cityName: String
     private var _temperature: String
+    private var _location: CLLocation
     
     public var cityName: String {
         get {
@@ -24,20 +26,23 @@ class WeatherModelItem {
             return String(_temperature) + " \u{00B0}C"
         }
     }
+    public var location: CLLocation {
+        get{
+            return self._location
+        }
+    }
     
-    init(_ cityName: String, temperature: String) {
+    init(_ cityName: String, temperature: String, location: CLLocation) {
         self._cityName = cityName
         self._temperature = temperature
+        self._location = location
     }
 }
 
-let YQUERY = "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition.temp%2C%20location.city%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Minsk%2Cby%22%20or%20text%3D%22Dubrowna%2Cby%22%20or%20text%3D%22Orsha%2Cby%22%20or%20text%3D%22Baran%2Cby%22%20or%20text%3D%22Shklow%2Cby%22%20or%20text%3D%22Mahilyow%2Cby%22%20or%20text%3D%22Buynichy%2Cby%22%20or%20text%3D%22Kirawsk%2Cby%22%20or%20text%3D%22Babruysk%2Cby%22%20or%20text%3D%22Asipovichy%2Cby%22%20or%20text%3D%22Kapyl%2Cby%22%20or%20text%3D%22Nyasvizh%2Cby%22%20or%20text%3D%22Haradzyeya%2Cby%22%20or%20text%3D%22Mir%2Cby%22%20or%20text%3D%22Karelichy%2Cby%22%20or%20text%3D%22Navahrudak%2Cby%22%20or%20text%3D%22Slonim%2Cby%22%20or%20text%3D%22Pruzhany%2Cby%22%20or%20text%3D%22Brest%2Cby%22%20or%20text%3D%22Haradzishcha%2Cby%22%20or%20text%3D%22Vilyeyka%2Cby%22%20or%20text%3D%22Pinsk%2Cby%22%20or%20text%3D%22Baranavichy%2Cby%22%20or%20text%3D%22Navapolatsk%2Cby%22%20or%20text%3D%22Vitsyebsk%2Cby%22%20or%20text%3D%22Homyel%2Cby%22)%20and%20u%3D%27c%27&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
-
 class WeatherModel {
-    private let delegate: WeatherTableReloadAsyncDelegate
+    private var delegates: [WeatherReloadAsyncDelegate] = [WeatherReloadAsyncDelegate]();
     private var _weather: [WeatherModelItem] = []
-    
-    private var refreshing: Bool = false
+    private var _refreshing: Bool = false
     
     public var getWeather: [WeatherModelItem] {
         get {
@@ -51,54 +56,67 @@ class WeatherModel {
         }
     }
     
-    init(delegate: WeatherTableReloadAsyncDelegate) {
-        self.delegate = delegate
+    let YQUERY = "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition.temp%2C%20wind.direction%2C%20wind.speed%2C%20item.lat%2C%20item.long%2C%20location.city%20from%20weather.forecast%20where%20woeid%20in(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Minsk%2C%20BY%22%20or%20text%3D%22Dubrovno%2C%20BY%22%20or%20text%3D%22Orsha%2C%20BY%22%20or%20text%3D%22Baran'%2C%20BY%22%20or%20text%3D%22Mahilyow%2C%20BY%22%20or%20text%3D%22Bobruysk%2C%20BY%22%20or%20text%3D%22Osipovichi%2C%20BY%22%20or%20text%3D%22Kopyl'%2C%20BY%22%20or%20text%3D%22Nesvizh%2C%20BY%22%20or%20text%3D%22Mir%2C%20BY%22%20or%20text%3D%22Navahrudak%2C%20BY%22%20or%20text%3D%22Slonim%2C%20BY%22%20or%20text%3D%22Pruzhany%2C%20BY%22%20or%20text%3D%22Brest%2C%20BY%22%20or%20text%3D%22Vileyka%2C%20BY%22%20or%20text%3D%22Pinsk%2C%20BY%22%20or%20text%3D%22Baranavichy%2C%20BY%22%20or%20text%3D%22Navapolatsk%2C%20BY%22%20or%20text%3D%22Vitsyebsk%2C%20BY%22%20or%20text%3D%22Homyel'%2C%20BY%22%20or%20text%3D%22Barysaw%2C%20BY%22)%20and%20u%3D'c'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+    
+    public func subscribe(_ delegate: WeatherReloadAsyncDelegate) {
+        self.delegates.append(delegate)
     }
     
     public func refresh() {
-        if refreshing {
+        if _refreshing {
             return
         }
-        refreshing = true
+        _refreshing = true
         print("*** Start refreshing weather")
         URLCache.shared.removeAllCachedResponses()
         Alamofire.request(YQUERY, encoding: URLEncoding.queryString).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
+//                print(value)
                 self._weather = [WeatherModelItem]()
-                DispatchQueue.main.async {
-                    self.delegate.reloadWeather()
-                }
+                self.invokeReloadWeather()
                 let json = JSON(value)
                 let cities = json["query"]["results"]["channel"]
                 for (_,subJson):(String, JSON) in cities {
-                    if let city = subJson["location"]["city"].string, let temperature = subJson["item"]["condition"]["temp"].string {
-                        let newWeatherItem = WeatherModelItem(city, temperature: temperature)
+                    if let city = subJson["location"]["city"].string,
+                        let temperature = subJson["item"]["condition"]["temp"].string,
+                        let lat = Double(subJson["item"]["lat"].string!),
+                        let long = Double(subJson["item"]["long"].string!)
+                    {
+                        let location = CLLocation(latitude: lat, longitude: long)
+                        let newWeatherItem = WeatherModelItem(city, temperature: temperature, location: location)
                         self._weather.append(newWeatherItem)
-                        DispatchQueue.main.async {
-                            self.delegate.reloadWeather()
-                        }
-                        print(city, temperature)
+                        self.invokeReloadWeather()
+                        print(city, temperature, location.coordinate.latitude, location.coordinate.longitude)
                     } else {
                         print("Invalid response format")
-                        DispatchQueue.main.async {
-                            self.delegate.onError()
-                        }
+                        self.invokeOnError()
+                        break
                     }
                 }
             case .failure:
                 print("Can't load weather info")
-                DispatchQueue.main.async {
-                    self.delegate.onError()
-                }
+                self.invokeOnError()
             }
-            self.refreshing = false
+            self._refreshing = false
+        }
+    }
+    
+    private func invokeReloadWeather() {
+        for delegate in delegates {
+            delegate.reloadWeather()
+        }
+    }
+    
+    private func invokeOnError() {
+        for delegate in delegates {
+            delegate.onError()
         }
     }
 }
 
 
-protocol WeatherTableReloadAsyncDelegate {
+protocol WeatherReloadAsyncDelegate {
     func reloadWeather()
     func onError()
 }

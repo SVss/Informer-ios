@@ -8,10 +8,10 @@
 
 import UIKit
 
-class WeatherTableViewController: UITableViewController, WeatherTableReloadAsyncDelegate {
+class WeatherTableViewController: UITableViewController, WeatherReloadAsyncDelegate {
     let alertController = UIAlertController(title: "Error", message: "Can't get weather info", preferredStyle: .alert)
     
-    lazy var weatherModel: WeatherModel = WeatherModel(delegate: self)
+    lazy var weatherModel: WeatherModel = WeatherModel()
 
     internal func reloadWeather() {
         tableView.reloadData()
@@ -28,6 +28,11 @@ class WeatherTableViewController: UITableViewController, WeatherTableReloadAsync
         
         self.refreshControl?.addTarget(self, action: #selector(WeatherTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         setDefaultAlertAction()
+        
+        weatherModel.subscribe(self)
+        
+        self.refreshControl?.beginRefreshing()
+        updateWeather()
     }
 
     func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -44,8 +49,7 @@ class WeatherTableViewController: UITableViewController, WeatherTableReloadAsync
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.refreshControl?.beginRefreshing()
-        updateWeather()
+        super.viewDidAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {
