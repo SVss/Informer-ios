@@ -6,20 +6,13 @@
 //  Copyright © 2017 BSUIR. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
 
 class City {
-    private var _id: Int
     private var _name: String
     private var _temperature: String
     private var _location: CLLocation
     
-    public var id: Int {
-        get {
-            return self._id
-        }
-    }
     public var name: String {
         get {
             return _name
@@ -36,8 +29,7 @@ class City {
         }
     }
     
-    init(_ id: Int, name: String, temperature: String, location: CLLocation) {
-        self._id = id
+    init(name: String, temperature: String, location: CLLocation) {
         self._name = name
         self._temperature = temperature
         self._location = location

@@ -6,11 +6,9 @@
 //  Copyright © 2017 BSUIR. All rights reserved.
 //
 
-import Foundation
 import MapKit
 
 class CityAnnotation: NSObject, MKAnnotation {
-    var id: Int?
     var title: String?
     var subtitle: String?
     var latitude: Double
@@ -34,8 +32,7 @@ class CityAnnotation: NSObject, MKAnnotation {
         self.longitude = coordinate.longitude
     }
     
-    init(city: City) {
-        self.id = city.id
+    init(_ city: City) {
         self.title = city.name
         self.subtitle = city.temperature
         self.latitude = city.location.coordinate.latitude

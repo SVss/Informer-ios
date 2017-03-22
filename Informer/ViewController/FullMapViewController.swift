@@ -8,35 +8,12 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 
 class FullMapViewController: UIViewController, WeatherReloadAsyncDelegate {
-    let alertController = UIAlertController(title: "Error", message: "Can't load weather info", preferredStyle: .alert)
     
+    let alertController = UIAlertController(title: "Error", message: "Can't load weather info", preferredStyle: .alert)
     let weatherModel = WeatherModel.getInstance()
     var cityAnnotations = [CityAnnotation]()
-    
-    internal func reloadWeather() {
-        cityAnnotations = [CityAnnotation]()
-        for city in weatherModel.getWeather {
-            let cityAnnotation = CityAnnotation(city: city)
-            cityAnnotations.append(cityAnnotation)
-            FullMapView.addAnnotation(cityAnnotation)
-        }
-    }
-    
-    internal func onError() {
-        present(alertController, animated: true, completion: nil)
-    }
-
-    private func setDefaultAlertAction() {
-        let defaultAlertAction = UIAlertAction(
-            title: "OK",
-            style: .default,
-            handler: nil
-        )
-        alertController.addAction(defaultAlertAction)
-    }
     
     @IBOutlet weak var FullMapView: MKMapView!
     
@@ -45,6 +22,15 @@ class FullMapViewController: UIViewController, WeatherReloadAsyncDelegate {
         setDefaultAlertAction()
         weatherModel.subscribe(self)
         reloadWeather()
+    }
+    
+    private func setDefaultAlertAction() {
+        let defaultAlertAction = UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: nil
+        )
+        alertController.addAction(defaultAlertAction)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +43,7 @@ class FullMapViewController: UIViewController, WeatherReloadAsyncDelegate {
 
     @IBAction func longPressOnMap(_ sender: UILongPressGestureRecognizer) {
         if (sender.state == .began) {
-            print("long press began!")
+//            print("long press began!")
             
             let locationPoint = sender.location(in: FullMapView)
             let location = FullMapView.convert(locationPoint, toCoordinateFrom: FullMapView)
@@ -68,20 +54,18 @@ class FullMapViewController: UIViewController, WeatherReloadAsyncDelegate {
             for city in cityAnnotations {
                 let dist = currentLocation.distance(from: city.location)
                 if (dist < minDist) {
-                    print("next min: ")
-                    print(city.latitude, city.longitude)
+//                    print("next min: ")
+//                    print(city.latitude, city.longitude)
                     minDist = dist
                     nearestCity = city
                 }
             }
             
             if (nearestCity != nil) {
-                FullMapView.addAnnotation(nearestCity!)
                 showCityOnMap(nearestCity!)
             }
         }
     }
-    
     
     func showCityOnMap(_ city: CityAnnotation) {
         FullMapView.selectAnnotation(city, animated: true)
@@ -89,4 +73,19 @@ class FullMapViewController: UIViewController, WeatherReloadAsyncDelegate {
         FullMapView.setRegion(region, animated: true)
     }
     
+    // WeatherReloadAsyncDelegate
+    
+    internal func reloadWeather() {
+        FullMapView.removeAnnotations(cityAnnotations)
+        cityAnnotations = [CityAnnotation]()
+        for city in weatherModel.getWeather {
+            let cityAnnotation = CityAnnotation(city)
+            cityAnnotations.append(cityAnnotation)
+            FullMapView.addAnnotation(cityAnnotation)
+        }
+    }
+    
+    internal func onError() {
+        present(alertController, animated: true, completion: nil)
+    }
 }

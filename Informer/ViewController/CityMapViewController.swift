@@ -21,9 +21,7 @@ class CityMapViewController: UIViewController {
             let cityPin = _cityAnnotation!
             CityMapOutlet.addAnnotation(cityPin)
             CityMapOutlet.selectAnnotation(cityPin, animated: true)
-            
             let region = MKCoordinateRegionMake(cityPin.coordinate, MKCoordinateSpanMake(1, 1))
-            
             CityMapOutlet.setRegion(region, animated: true)
         }
     }

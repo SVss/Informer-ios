@@ -79,7 +79,7 @@ class WeatherTableViewController: UITableViewController, WeatherReloadAsyncDeleg
         if (segue.identifier == "showDetailWeatherMap") {
             let detailViewController = segue.destination as! CityMapViewController
             let city = weatherModel.getWeather[(self.tableView.indexPathForSelectedRow?.row)!]
-            let cityAnnotaion = CityAnnotation(city: city)
+            let cityAnnotaion = CityAnnotation(city)
             detailViewController.selectCity(cityAnnotaion)
         }
     }
