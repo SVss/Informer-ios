@@ -18,11 +18,11 @@ class CityMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if _cityAnnotation != nil {
-            let city = _cityAnnotation!
-            CityMapOutlet.addAnnotation(city)
-            CityMapOutlet.selectAnnotation(city, animated: true)
+            let cityPin = _cityAnnotation!
+            CityMapOutlet.addAnnotation(cityPin)
+            CityMapOutlet.selectAnnotation(cityPin, animated: true)
             
-            let region = MKCoordinateRegionMake(city.coordinate, MKCoordinateSpanMake(1, 1))
+            let region = MKCoordinateRegionMake(cityPin.coordinate, MKCoordinateSpanMake(1, 1))
             
             CityMapOutlet.setRegion(region, animated: true)
         }

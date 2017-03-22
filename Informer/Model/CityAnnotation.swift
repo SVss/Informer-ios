@@ -20,6 +20,10 @@ class CityAnnotation: NSObject, MKAnnotation {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
+    var location: CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     init(latitude: Double, longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude
@@ -28,5 +32,13 @@ class CityAnnotation: NSObject, MKAnnotation {
     init(coordinate: CLLocationCoordinate2D) {
         self.latitude = coordinate.latitude
         self.longitude = coordinate.longitude
+    }
+    
+    init(city: City) {
+        self.id = city.id
+        self.title = city.name
+        self.subtitle = city.temperature
+        self.latitude = city.location.coordinate.latitude
+        self.longitude = city.location.coordinate.longitude
     }
 }

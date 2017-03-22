@@ -16,6 +16,16 @@ class WeatherModel {
     private var _cities: [City] = []
     private var _refreshing: Bool = false
     
+    private static var model: WeatherModel = WeatherModel()
+    
+    private init() {
+        
+    }
+    
+    public static func getInstance() -> WeatherModel {
+        return model
+    }
+    
     public var getWeather: [City] {
         get {
             return _cities

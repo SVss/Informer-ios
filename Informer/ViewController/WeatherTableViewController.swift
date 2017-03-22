@@ -9,9 +9,9 @@
 import UIKit
 
 class WeatherTableViewController: UITableViewController, WeatherReloadAsyncDelegate {
-    let alertController = UIAlertController(title: "Error", message: "Can't get weather info", preferredStyle: .alert)
+    let alertController = UIAlertController(title: "Error", message: "Can't load weather info", preferredStyle: .alert)
     
-    lazy var weatherModel: WeatherModel = WeatherModel()
+    lazy var weatherModel: WeatherModel = WeatherModel.getInstance()
 
     internal func reloadWeather() {
         tableView.reloadData()
@@ -79,9 +79,7 @@ class WeatherTableViewController: UITableViewController, WeatherReloadAsyncDeleg
         if (segue.identifier == "showDetailWeatherMap") {
             let detailViewController = segue.destination as! CityMapViewController
             let city = weatherModel.getWeather[(self.tableView.indexPathForSelectedRow?.row)!]
-            let cityAnnotaion = CityAnnotation(coordinate: city.location.coordinate)
-            cityAnnotaion.title = city.name
-            cityAnnotaion.subtitle = city.temperature
+            let cityAnnotaion = CityAnnotation(city: city)
             detailViewController.selectCity(cityAnnotaion)
         }
     }
